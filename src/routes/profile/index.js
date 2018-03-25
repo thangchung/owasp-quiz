@@ -1,10 +1,15 @@
 import { h, Component } from 'preact';
-import { observer, Provider, inject, connect } from 'mobx-preact';
+import { observer, inject } from 'mobx-preact';
 import style from './style';
 
 @inject('store')
 @observer
 export default class Profile extends Component {
+	constructor(props) {
+		super(props);
+		this.localState = this.props.store.profileState;
+	}
+
 	componentDidMount() {
 		this.timer = setInterval(this.updateTime, 1000);
 	}
@@ -14,25 +19,25 @@ export default class Profile extends Component {
 	}
 
 	updateTime = () => {
-		this.props.store.updateTime(Date.now());
+		this.localState.updateTime(Date.now());
 	};
-
+	
 	increment = () => {
-		this.props.store.increment();
+		this.localState.increment();
 	};
 
-	render({ user }, { time, count }) {
+	render({ user }) {
 		return (
 			<div class={style.profile}>
 				<h1>Profile: {user}</h1>
 				<p>This is the user profile for a user named {user}.</p>
 
-				<div>Current time: {new Date(this.props.store.time).toLocaleString()}</div>
+				<div>Current time: {new Date(this.localState.time).toLocaleString()}</div>
 
 				<p>
-					<button onClick={this.increment}>Click Me</button>
+					<button class="button is-primary is-small is-outlined" onClick={this.increment}>Click Me</button>
 					{' '}
-					Clicked {this.props.store.count} times.
+					Clicked {this.localState.count} times.
 				</p>
 			</div>
 		);

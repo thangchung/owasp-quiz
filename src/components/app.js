@@ -2,19 +2,16 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Provider } from 'mobx-preact';
 
-import Header from './header';
-import Footer from './footer';
+import { Header, Footer } from './';
 
-import Welcome from 'async!../routes/welcome';
 import Profile from 'async!../routes/profile';
+import Exam from 'async!../routes/exam';
 
-import ProfileStore from '../routes/profile/store';
+import { store } from '../models';
 
 if (module.hot) {
 	require('preact/debug');
 }
-
-const store = new ProfileStore();
 
 export default class App extends Component {
 	handleRoute = e => {
@@ -27,7 +24,7 @@ export default class App extends Component {
 				<div id="app">
 					<Header />
 					<Router onChange={this.handleRoute}>
-						<Welcome path="/" />
+						<Exam path="/" />
 						<Profile path="/profile/" user="me" />
 						<Profile path="/profile/:user" />
 					</Router>
