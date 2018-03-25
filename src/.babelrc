@@ -1,5 +1,15 @@
 {
-    "presets": [ 
-        ["preact-cli/babel", { "modules": "commonjs" }]
+    "presets": [
+        [
+            "preact-cli/babel",
+            {
+                "modules": "commonjs"
+            }
+        ],
+        "es2015",
+        "stage-1"
+    ],
+    "plugins": [
+        "transform-decorators-legacy"
     ]
 }
