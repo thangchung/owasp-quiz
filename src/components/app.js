@@ -3,8 +3,11 @@ import { Router } from 'preact-router';
 import { Provider } from 'mobx-preact';
 
 import Header from './header';
-import Home from 'async!../routes/home';
+import Footer from './footer';
+
+import Welcome from 'async!../routes/welcome';
 import Profile from 'async!../routes/profile';
+
 import ProfileStore from '../routes/profile/store';
 
 if (module.hot) {
@@ -24,10 +27,11 @@ export default class App extends Component {
 				<div id="app">
 					<Header />
 					<Router onChange={this.handleRoute}>
-						<Home path="/" />
+						<Welcome path="/" />
 						<Profile path="/profile/" user="me" />
 						<Profile path="/profile/:user" />
 					</Router>
+					<Footer />
 				</div>
 			</Provider>
 		);
