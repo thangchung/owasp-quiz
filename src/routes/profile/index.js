@@ -1,13 +1,22 @@
-import { h, Component } from 'preact';
-import { observer, inject } from 'mobx-preact';
+import React, { Component } from 'react';
+
+import { DatePicker } from 'react-toolbox/lib/date_picker';
+import { connect } from 'mobx-preact';
 import style from './style';
 
-@inject('store')
-@observer
+const datetime = new Date(2015, 10, 16);
+const min_datetime = new Date(new Date(datetime).setDate(8));
+datetime.setHours(17);
+datetime.setMinutes(28);
+
+@connect(['store'])
 export default class Profile extends Component {
 	constructor(props) {
 		super(props);
-		this.localState = this.props.store.profileState;
+		this.localStore = this.props.store.profileStore;
+		this.state = {
+			date1: datetime
+		};
 	}
 
 	componentDidMount() {
@@ -19,11 +28,15 @@ export default class Profile extends Component {
 	}
 
 	updateTime = () => {
-		this.localState.updateTime(Date.now());
+		this.localStore.updateTime(Date.now());
 	};
-	
+
 	increment = () => {
-		this.localState.increment();
+		this.localStore.increment();
+	};
+
+	handleChange = (item, value) => {
+		this.setState({ ...this.state, [item]: value });
 	};
 
 	render({ user }) {
@@ -32,12 +45,16 @@ export default class Profile extends Component {
 				<h1>Profile: {user}</h1>
 				<p>This is the user profile for a user named {user}.</p>
 
-				<div>Current time: {new Date(this.localState.time).toLocaleString()}</div>
+				<div>Current time: {new Date(this.localStore.time).toLocaleString()}</div>
 
 				<p>
 					<button class="button is-primary is-small is-outlined" onClick={this.increment}>Click Me</button>
 					{' '}
-					Clicked {this.localState.count} times.
+					Clicked {this.localStore.count} times.
+				</p>
+
+				<p>
+					<DatePicker label='Birthdate' onChange={this.handleChange.bind(this, 'date1')} value={this.state.date1} />
 				</p>
 			</div>
 		);

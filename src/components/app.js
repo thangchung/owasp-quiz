@@ -1,9 +1,10 @@
-import { h, Component } from 'preact';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Router } from 'preact-router';
 import { Provider } from 'mobx-preact';
+import { AppBar } from 'react-toolbox/lib/app_bar';
 
 import { Header, Footer } from './';
-
 import Profile from 'async!../routes/profile';
 import Exam from 'async!../routes/exam';
 

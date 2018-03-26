@@ -1,11 +1,11 @@
 import { observable, action } from 'mobx';
 
-export default class ProfileState {
+export default class ProfileStore {
 	@observable count = 1;
 	@observable time = Date.now();
 
-	constructor(parentState) {
-		this.parentState = parentState;
+	constructor(parentStore) {
+		this.parentStore = parentStore;
 	}
 
 	@action

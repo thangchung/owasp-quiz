@@ -1,10 +1,10 @@
-import UiState from './global/state';
-import ProfileState from './profile/state';
+import UiStore from './global/store';
+import ProfileStore from './profile/store';
 
 class RootStore {
   constructor() {
-    this.profileState = new ProfileState(this);
-    this.uiState = new UiState(this);
+    this.profileStore = new ProfileStore(this);
+    this.uiStore = new UiStore(this);
   }
 }
 
