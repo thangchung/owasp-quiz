@@ -1,4 +1,4 @@
-var examData = [{
+export const examData = [{
   "question": "Which of the following consequences is most likely to occur due to an injection attack?",
   "correct": 2,
   "answers": [

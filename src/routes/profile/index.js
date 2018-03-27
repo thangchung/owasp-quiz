@@ -55,6 +55,7 @@ export default class Profile extends Component {
 
 				<p>
 					<DatePicker label='Birthdate' onChange={this.handleChange.bind(this, 'date1')} value={this.state.date1} />
+					
 				</p>
 			</div>
 		);
